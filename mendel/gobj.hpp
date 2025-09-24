@@ -1,5 +1,3 @@
-//Copyright 2025 SkinChangerDev. All Rights Reserved.
-
 #include "gdefs.hpp"
 
 template<typename T>

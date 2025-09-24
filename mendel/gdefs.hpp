@@ -1,5 +1,3 @@
-//Copyright 2025 SkinChangerDev. All Rights Reserved.
-
 #include <stdint.h>
 
 using intgen_t = uint64_t;
