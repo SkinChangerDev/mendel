@@ -3,52 +3,55 @@
 #include "gdefs.hpp"
 #include "gobj.hpp"
 
-template<typename T>
-class gptr
+namespace mendel
 {
-public:
-    gptr(gobj<T>* inPtr)
+    template<typename T>
+    class gptr
     {
-        gptr(inPtr, inPtr->getGen);
-    }
+    public:
+        gptr(gobj<T>* inPtr)
+        {
+            gptr(inPtr, inPtr->getGen);
+        }
 
-    gptr(const gptr<T>& inGptr)
-    {
-        gptr(inGptr.ptr, inGptr.gen);
-    }
+        gptr(const gptr<T>& inGptr)
+        {
+            gptr(inGptr.ptr, inGptr.gen);
+        }
 
-    gobj<T>* get() const
-    {
-        return isValid() ? ptr : nullptr;
-    }
+        gobj<T>* get() const
+        {
+            return isValid() ? ptr : nullptr;
+        }
 
-    gobj<T>* operator->() const
-    {
-        return get();
-    }
+        gobj<T>* operator->() const
+        {
+            return get();
+        }
 
-    gobj<T>& operator*() const
-    {
-        return *get();
-    }
+        gobj<T>& operator*() const
+        {
+            return *get();
+        }
 
-    bool isValid() const
-    {
-        return ptr && gen == ptr->getGen();
-    }
+        bool isValid() const
+        {
+            return ptr && gen == ptr->getGen();
+        }
 
-    operator bool() const
-    {
-        return isValid();
-    }
+        operator bool() const
+        {
+            return isValid();
+        }
 
-private:
-    gptr(gobj<T>* inPtr, intgen_t inGen)
-    : ptr(inPtr)
-    , gen(inGen)
-    {}
+    private:
+        gptr(gobj<T>* inPtr, intgen_t inGen)
+        : ptr(inPtr)
+        , gen(inGen)
+        {}
 
-    gobj<T>* ptr;
+        gobj<T>* ptr;
 
-    intgen_t gen;
-};
+        intgen_t gen;
+    };
+}
