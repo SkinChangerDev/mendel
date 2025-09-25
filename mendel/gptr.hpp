@@ -19,7 +19,7 @@ public:
 
     gobj<T>* get() const
     {
-        return *this ? ptr : nullptr;
+        return isValid() ? ptr : nullptr;
     }
 
     gobj<T>* operator->() const
