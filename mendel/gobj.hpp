@@ -7,7 +7,7 @@ namespace mendel
     inline intgen_t getUniqueGen()
     {
         static intgen_t uniqueGen;
-        return uniqueGen += genincr;
+        return uniqueGen += GENINCR;
     }
 
     template<typename T>
@@ -22,7 +22,7 @@ namespace mendel
 
         ~gobj()
         {
-            gen = nullgen;
+            gen = NULLGEN;
         }
 
         bool operator==(const gobj<T>& other) const
