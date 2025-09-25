@@ -1,8 +1,7 @@
+#pragma once
+
 #include "gdefs.hpp"
 #include "gobj.hpp"
-
-template<typename T>
-class gobj;
 
 template<typename T>
 class gptr
@@ -35,7 +34,7 @@ public:
 
     bool isValid() const
     {
-        return ptr && gen == ptr->gen;
+        return ptr && gen == ptr->getGen();
     }
 
     operator bool() const

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdint.h>
 
 using intgen_t = uint64_t;

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "gdefs.hpp"
 
 intgen_t getUniqueGen()
