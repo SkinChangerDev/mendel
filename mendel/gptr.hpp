@@ -10,14 +10,13 @@ class gptr
 public:
     gptr(gobj<T>* inPtr)
     {
-        ptr = inPtr;
-        gen = inPtr->gen;
+        gptr(inPtr, inPtr->getGen);
     }
 
     gptr(const gptr<T>& inGptr)
-    : ptr(inGptr.ptr)
-    , gen(inGptr.gen)
-    {}
+    {
+        gptr(inGptr.ptr, inGptr.gen);
+    }
 
     gobj<T>* get() const
     {
@@ -45,6 +44,11 @@ public:
     }
 
 private:
+    gptr(gobj<T>* inPtr, intgen_t inGen)
+    : ptr(inPtr)
+    , gen(inGen)
+    {}
+
     gobj<T>* ptr;
 
     intgen_t gen;
