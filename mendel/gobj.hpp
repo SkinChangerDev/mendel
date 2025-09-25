@@ -2,7 +2,7 @@
 
 #include "gdefs.hpp"
 
-intgen_t getUniqueGen()
+inline intgen_t getUniqueGen()
 {
     static intgen_t uniqueGen;
     return uniqueGen += genincr;
