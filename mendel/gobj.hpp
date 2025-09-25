@@ -1,8 +1,5 @@
 #include "gdefs.hpp"
 
-template<typename T>
-class gptr;
-
 intgen_t getUniqueGen()
 {
     static intgen_t uniqueGen;
@@ -39,8 +36,11 @@ public:
         return T::operator=(other);
     }
 
+    intgen_t getGen() const
+    {
+        return gen;
+    }
+
 private:
     intgen_t gen;
-
-    friend class gptr<T>;
 };
