@@ -35,11 +35,12 @@ namespace mendel
             return T::operator=(other);
         }
 
-        intgen_t getGen() const
+        template<typename U>
+        friend intgen_t getGen(gobj<U>* object)
         {
-            return gen;
+            return object->gen;
         }
-
+    
     private:
         intgen_t gen;
     };

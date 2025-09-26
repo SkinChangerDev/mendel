@@ -1,7 +1,6 @@
 #pragma once
 
 #include "gdefs.hpp"
-#include "gobj.hpp"
 
 namespace mendel
 {
@@ -9,9 +8,9 @@ namespace mendel
     class gptr
     {
     public:
-        gptr(gobj<T>* inPtr)
+        gptr(T* inPtr)
         {
-            gptr(inPtr, inPtr->getGen);
+            gptr(inPtr, getGen(ptr));
         }
 
         gptr(const gptr<T>& inGptr)
@@ -19,24 +18,24 @@ namespace mendel
             gptr(inGptr.ptr, inGptr.gen);
         }
 
-        gobj<T>* get() const
+        T* get() const
         {
             return isValid() ? ptr : nullptr;
         }
 
-        gobj<T>* operator->() const
+        T* operator->() const
         {
             return get();
         }
 
-        gobj<T>& operator*() const
+        T& operator*() const
         {
             return *get();
         }
 
         bool isValid() const
         {
-            return ptr && gen == ptr->getGen();
+            return ptr && gen == getGen(ptr);
         }
 
         operator bool() const
@@ -45,12 +44,12 @@ namespace mendel
         }
 
     private:
-        gptr(gobj<T>* inPtr, intgen_t inGen)
+        gptr(T* inPtr, intgen_t inGen)
         : ptr(inPtr)
         , gen(inGen)
         {}
 
-        gobj<T>* ptr;
+        T* ptr;
 
         intgen_t gen;
     };
