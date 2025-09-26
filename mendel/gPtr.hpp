@@ -13,7 +13,7 @@ namespace mendel
             gPtr(nullptr, NULLGEN);
         }
     
-        gPtr(T* inPtr)
+        explicit gPtr(T* inPtr)
         {
             gPtr(inPtr, getGen(ptr));
         }
