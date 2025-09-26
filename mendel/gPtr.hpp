@@ -8,6 +8,11 @@ namespace mendel
     class gPtr
     {
     public:
+        gPtr()
+        {
+            gPtr(nullptr, NULLGEN);
+        }
+    
         gPtr(T* inPtr)
         {
             gPtr(inPtr, getGen(ptr));
