@@ -1,15 +1,10 @@
 #pragma once
 
 #include "gdefs.hpp"
+#include "uniqueGen.hpp"
 
 namespace mendel
 {
-    inline intgen_t getUniqueGen()
-    {
-        static intgen_t uniqueGen;
-        return uniqueGen += GENINCR;
-    }
-
     template<typename T>
     class gobj : public T
     {
