@@ -1,21 +1,21 @@
 #pragma once
 
-#include "gdefs.hpp"
+#include "gDefs.hpp"
 
 namespace mendel
 {
     template<typename T>
-    class gptr
+    class gPtr
     {
     public:
-        gptr(T* inPtr)
+        gPtr(T* inPtr)
         {
-            gptr(inPtr, getGen(ptr));
+            gPtr(inPtr, getGen(ptr));
         }
 
-        gptr(const gptr<T>& inGptr)
+        gPtr(const gPtr<T>& inGptr)
         {
-            gptr(inGptr.ptr, inGptr.gen);
+            gPtr(inGptr.ptr, inGptr.gen);
         }
 
         T* get() const
@@ -44,7 +44,7 @@ namespace mendel
         }
 
     private:
-        gptr(T* inPtr, intgen_t inGen)
+        gPtr(T* inPtr, intgen_t inGen)
         : ptr(inPtr)
         , gen(inGen)
         {}

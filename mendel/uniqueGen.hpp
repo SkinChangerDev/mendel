@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gdefs.hpp"
+#include "gDefs.hpp"
 
 namespace mendel
 {

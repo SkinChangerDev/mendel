@@ -1,42 +1,42 @@
 #pragma once
 
-#include "gdefs.hpp"
+#include "gDefs.hpp"
 #include "uniqueGen.hpp"
 
 namespace mendel
 {
     template<typename T>
-    class gobj : public T
+    class gObj : public T
     {
     public:
         template<typename ... TArgs>
-        gobj(TArgs ... args) : T(args ...)
+        gObj(TArgs ... args) : T(args ...)
         {
             gen = getUniqueGen();
         }
 
-        ~gobj()
+        ~gObj()
         {
             gen = NULLGEN;
         }
 
-        bool operator==(const gobj<T>& other) const
+        bool operator==(const gObj<T>& other) const
         {
             return T::operator==(other);
         }
 
-        bool operator!=(const gobj<T>& other) const
+        bool operator!=(const gObj<T>& other) const
         {
             return !T::operator==(other);
         }
 
-        gobj<T>& operator=(const gobj<T>& other) const
+        gObj<T>& operator=(const gObj<T>& other) const
         {
             return T::operator=(other);
         }
 
         template<typename U>
-        friend intgen_t getGen(gobj<U>* object)
+        friend intgen_t getGen(gObj<U>* object)
         {
             return object->gen;
         }
