@@ -18,11 +18,6 @@ namespace mendel
             gPtr(inPtr, getGen(ptr));
         }
 
-        gPtr(const gPtr<T>& inGptr)
-        {
-            gPtr(inGptr.ptr, inGptr.gen);
-        }
-
         T* get() const
         {
             return isValid() ? ptr : nullptr;
