@@ -17,6 +17,11 @@ namespace mendel
             gen = getUniqueGen();
         }
 
+        gObj(gObj& other) : T(other)
+        {
+            gen = getUniqueGen();
+        }
+
         gObj(gObj&& other) : T(std::move(other.T))
         {
             gen = getUniqueGen();
