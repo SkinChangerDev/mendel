@@ -1,27 +1,29 @@
 #pragma once
 
+#include <type_traits>
+#include "mendelTraits.hpp"
 #include "gDefs.hpp"
+#include "gObj.hpp"
 
 namespace mendel
 {
     template<typename T>
     class gPtr
     {
+        //static_assert(std::is_base_of<gObj, T>(), "gPtr can only be used with children of gObj or incomplete types");
+        static_assert(std::is_base_of<gObj, T>() || is_complete<T>(), "gPtr can only be used with children of gObj or incomplete types");
+
+
     public:
         gPtr()
-        {
-            gPtr(nullptr, NULLGEN);
-        }
+        : ptr(nullptr)
+        , gen(NULLGEN)
+        {}
     
         explicit gPtr(T* inPtr)
-        {
-            gPtr(inPtr, getGen(ptr));
-        }
-
-        gPtr(const gPtr<T>& inGptr)
-        {
-            gPtr(inGptr.ptr, inGptr.gen);
-        }
+        : ptr(inPtr)
+        , gen(inPtr->gen)
+        {}
 
         T* get() const
         {
@@ -40,7 +42,7 @@ namespace mendel
 
         bool isValid() const
         {
-            return ptr && gen == getGen(ptr);
+            return ptr && gen == ptr->getGen;
         }
 
         operator bool() const
@@ -49,11 +51,6 @@ namespace mendel
         }
 
     private:
-        gPtr(T* inPtr, intgen_t inGen)
-        : ptr(inPtr)
-        , gen(inGen)
-        {}
-
         T* ptr;
 
         intgen_t gen;

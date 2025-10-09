@@ -7,60 +7,41 @@
 
 namespace mendel
 {
-    template<typename T>
-    class gObj : public T
+    class gObj
     {
     public:
-        template<typename ... TArgs>
-        gObj(TArgs ... args) : T(args ...)
-        {
-            gen = getUniqueGen();
-        }
+        gObj(gObj& other)
+        : gen(getUniqueGen())
+        {}
 
-        gObj(gObj&& other) : T(std::move(other.T))
-        {
-            gen = getUniqueGen();
-        }
+        gObj(gObj&& other)
+        : gen(getUniqueGen())
+        {}
 
-        gObj() : T()
-        {
-            gen = getUniqueGen();
-        }
+        gObj()
+        : gen(getUniqueGen())
+        {}
 
         ~gObj()
         {
             gen = NULLGEN;
         }
 
-        gObj<T>& operator=(const gObj<T>& other)
+        gObj& operator=(const gObj& other)
         {
-            T::operator=(other);
             return *this;
         }
 
-        gObj<T>& operator=(gObj<T>&& other)
+        gObj& operator=(gObj&& other)
         {
-            T::operator=(std::move(other.T));
             return *this;
         }
 
-
-        bool operator==(const gObj<T>& other) const
+        intgen_t getGen() const
         {
-            return T::operator==(other);
+            return gen;
         }
 
-        bool operator!=(const gObj<T>& other) const
-        {
-            return !T::operator==(other);
-        }
-
-        template<typename U>
-        friend intgen_t getGen(gObj<U>* object)
-        {
-            return object->gen;
-        }
-    
     private:
         intgen_t gen;
     };
